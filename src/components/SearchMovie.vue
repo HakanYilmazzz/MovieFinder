@@ -7,7 +7,7 @@
       list="selection"
       placeholder="Film seçiniz"
     />
-    <datalist id="selection" :elevation="n - 1">
+    <datalist id="selection">
       <option v-for="(item, idx) in filmsUnique" :key="idx" :value="item" class="secenek">
         {{ item }}
       </option>
@@ -17,7 +17,6 @@
 
 <script>
 export default {
-  // locationDiv.innerHTML = '<h2>' + location.location  + '</h2><img src="https://maps.googleapis.com/maps/api/streetview?size=120x120&location=' + location.geo.lat + ',' + location.geo.lng + '" align="right">';
 
   props: ["veri"],
   data() {
@@ -38,17 +37,17 @@ export default {
   beforeUpdate() {
     var films = [];
     var gelenVeri = JSON.parse(JSON.stringify(this.veri));
-    // console.log(gelenVeri);
     gelenVeri.forEach((element) => {
-      films.push(element.title);
+      if(element.locations != null){
+        films.push(element.title);
+      }
+      
     });
     this.filmsUnique = [...new Set(films)];
-    // console.log(filmsUnique);
   },
   methods: {
     getItems(selectedValue) {
       this.selectedValue = selectedValue;
-      console.log(this.selectedValue);
     },
   },
 };

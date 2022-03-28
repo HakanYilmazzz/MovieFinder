@@ -38,18 +38,11 @@ export default {
       this.secilmis = value
     },
     fetchData() {
-      let locations = [];
       this.error = this.data = null;
-      console.log('fetching data');
       fetch('https://data.sfgov.org/resource/yitu-d5am.json')
         .then(response => response.json())
         .then(data => {
           this.data = data;
-         // console.log(data);
-          data.forEach(element => {
-            locations.push(element.locations);
-          });
-         // console.log(locations);
         })
         .catch(error => {
           this.error = error;
@@ -60,7 +53,7 @@ export default {
 </script>
 <style >
   .v-main__wrap{
-    background-color: darkslategrey;
+    background-color: rgb(60, 87, 87);
     overflow: hidden;
     display: flex;
     flex-direction: column;
