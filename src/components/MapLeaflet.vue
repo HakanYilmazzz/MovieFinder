@@ -21,9 +21,9 @@
         v-for="(item, id) in LastMarkersList"
         :lat-lng="item"
         :key="id"
-        draggable
       >
         <l-popup> {{ item }} </l-popup>
+       
       </l-marker>
     </l-map>
   </div>
@@ -44,8 +44,6 @@ export default {
   data() {
     return {
       zoom: 11,
-      iconWidth: 25,
-      iconHeight: 40,
       markers: [],
       data: [],
       LastMarkersList: [],

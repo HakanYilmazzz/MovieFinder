@@ -1,5 +1,6 @@
 <template>
-  <div class="Header"><span>Movie Finder</span></div>
+<div class="Header"><span>Movie Finder</span>
+</div>
   <div class="arama">
     <input
       class="effect-2"
@@ -9,12 +10,7 @@
       placeholder="Film seçiniz.."
     />
     <datalist id="selection">
-      <option
-        v-for="(item, idx) in filmsUnique"
-        :key="idx"
-        :value="item"
-        class="secenek"
-      >
+      <option v-for="(item, idx) in filmsUnique" :key="idx" :value="item" class="secenek">
         {{ item }}
       </option>
     </datalist>
@@ -23,6 +19,7 @@
 
 <script>
 export default {
+  emits: ["secilen"],
   props: ["veri"],
   data() {
     return {
@@ -43,9 +40,10 @@ export default {
     let films = [];
     let gelenVeri = JSON.parse(JSON.stringify(this.veri));
     gelenVeri.forEach((element) => {
-      if (element.locations != null) {
+      if(element.locations != null){
         films.push(element.title);
       }
+      
     });
     this.filmsUnique = [...new Set(films)];
   },
@@ -57,28 +55,29 @@ export default {
 };
 </script>
 <style>
-.Header {
+.Header{
   color: white;
   padding: 10px;
   font-size: 28px;
   font-weight: bold;
   text-align: center;
-  margin-top: 2%;
+  margin-top:2%
 }
 ::placeholder {
   color: white;
   font-weight: 600;
-  opacity: 0.5;
+  opacity: .5;
 }
-.arama {
+.arama{
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin: 3%;
+  margin:3%;
   width: 65%;
 }
 .effect-2 {
+  outline: none;
   color: white;
   text-align: center;
   width: 100%;
@@ -102,4 +101,6 @@ export default {
   transition: 0.4s;
   left: 0;
 }
+
+
 </style>
