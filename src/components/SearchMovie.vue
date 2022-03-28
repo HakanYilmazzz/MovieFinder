@@ -1,14 +1,20 @@
 <template>
+  <div class="Header"><span>Movie Finder</span></div>
   <div class="arama">
     <input
       class="effect-2"
       type="text"
       v-model="inputHolder"
       list="selection"
-      placeholder="Film seçiniz"
+      placeholder="Film seçiniz.."
     />
     <datalist id="selection">
-      <option v-for="(item, idx) in filmsUnique" :key="idx" :value="item" class="secenek">
+      <option
+        v-for="(item, idx) in filmsUnique"
+        :key="idx"
+        :value="item"
+        class="secenek"
+      >
         {{ item }}
       </option>
     </datalist>
@@ -17,7 +23,6 @@
 
 <script>
 export default {
-
   props: ["veri"],
   data() {
     return {
@@ -35,13 +40,12 @@ export default {
     },
   },
   beforeUpdate() {
-    var films = [];
-    var gelenVeri = JSON.parse(JSON.stringify(this.veri));
+    let films = [];
+    let gelenVeri = JSON.parse(JSON.stringify(this.veri));
     gelenVeri.forEach((element) => {
-      if(element.locations != null){
+      if (element.locations != null) {
         films.push(element.title);
       }
-      
     });
     this.filmsUnique = [...new Set(films)];
   },
@@ -53,17 +57,25 @@ export default {
 };
 </script>
 <style>
+.Header {
+  color: white;
+  padding: 10px;
+  font-size: 28px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 2%;
+}
 ::placeholder {
   color: white;
   font-weight: 600;
-  opacity: .8;
+  opacity: 0.5;
 }
-.arama{
+.arama {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin:10%;
+  margin: 3%;
   width: 65%;
 }
 .effect-2 {
@@ -83,21 +95,11 @@ export default {
   height: 2px;
   background-color: #4caf50;
   transition: 0.4s;
+  outline: none;
 }
 .effect-2:focus ~ .focus-border {
   width: 100%;
   transition: 0.4s;
   left: 0;
 }
-.secenek{
-  background-color: red;
-  color: white;
-  text-align: center;
-  width: 100%;
-  border: 5px solid #ccc;
-  padding: 7px 0;
-  border-radius: 5px;
-  border-bottom: 5px solid rgb(233, 87, 87);
-}
-
 </style>

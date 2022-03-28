@@ -2,11 +2,11 @@
   <div
     style="
       height: 53vh;
-      width: 98vw;
+      width: 100vw;
       border: 4px solid grey;
-      border-radius: 10px;
       bottom: 0;
       display: flex;
+      position: absolute;
     "
   >
     <l-map
@@ -17,18 +17,14 @@
       <l-tile-layer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       ></l-tile-layer>
-
-      
-        <l-marker
-          v-for="(item, id) in LastMarkersList"
-          :lat-lng="item"
-          :key="id"
-          draggable
-        >
-          <l-popup> {{item}} </l-popup>
-        </l-marker>
-
-      
+      <l-marker
+        v-for="(item, id) in LastMarkersList"
+        :lat-lng="item"
+        :key="id"
+        draggable
+      >
+        <l-popup> {{ item }} </l-popup>
+      </l-marker>
     </l-map>
   </div>
 </template>
@@ -59,25 +55,20 @@ export default {
     this.markers = [];
     let gelenVeri = JSON.parse(JSON.stringify(this.veri));
     let filtered = gelenVeri.filter((a) => a.title == this.secilmis);
-    console.log(filtered, filtered.length);
     for (var i = 0; i < filtered.length; i++) {
       if (filtered[i].locations != null) {
-        this.markers.push((Math.random() * (37.83-37.62) + 37.62).toFixed(4));
-        this.markers.push((Math.random() * (-122.5105-(-122.3696)) + (-122.3696)).toFixed(4));
+        this.markers.push((Math.random() * (37.83 - 37.62) + 37.62).toFixed(4));
+        this.markers.push(
+          (Math.random() * (-122.5105 - -122.3696) + -122.3696).toFixed(4)
+        );
       }
     }
     let markersList = JSON.parse(JSON.stringify(this.markers));
-    console.log(markersList);
     this.LastMarkersList = [];
     let size = 2;
     for (let i = 0; i < markersList.length; i += size) {
       this.LastMarkersList.push(markersList.slice(i, i + size));
     }
-    console.log(JSON.parse(JSON.stringify(this.LastMarkersList)), this.LastMarkersList.length);
-
-    // for (var y = 0; y < this.LastMarkersList.length; y++) {
-    //   this.LastMarkersList[y].reverse();
-    // }
   },
   // updated(){
   //     var gelenVeri = JSON.parse(JSON.stringify(this.veri));
@@ -122,3 +113,5 @@ export default {
   },
 };
 </script>
+<style>
+</style>
