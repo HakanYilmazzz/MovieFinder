@@ -94,23 +94,7 @@ export default {
   //             this.markers[y].reverse();
   //           }
   // },
-
-  computed: {
-    iconUrl() {
-      return `https://placekitten.com/${this.iconWidth}/${this.iconHeight}`;
-    },
-    iconSize() {
-      return [this.iconWidth, this.iconHeight];
-    },
-  },
-  methods: {
-    changeIcon() {
-      this.iconWidth += 2;
-      if (this.iconWidth > this.iconHeight) {
-        this.iconWidth = Math.floor(this.iconHeight / 2);
-      }
-    },
-  },
+ 
 };
 </script>
 <style>
