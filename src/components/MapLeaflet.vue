@@ -17,13 +17,17 @@
       <l-tile-layer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       ></l-tile-layer>
-      <l-marker
-        v-for="(item, id) in LastMarkersList"
-        :lat-lng="item"
-        :key="id"
-      >
-        <l-popup> {{ item }} </l-popup>
-       
+      <l-marker v-for="(item, id) in LastMarkersList" :lat-lng="item" :key="id">
+        <l-popup>
+          <span style="font-weight: bold"> Filmin Adı:</span>
+          {{ filtered[0].title }} <br />
+          <span style="font-weight: bold">Filmin Yönetmeni:</span>
+          {{ filtered[0].director }} <br />
+          <span style="font-weight: bold">Yapım yılı:</span>
+          {{ filtered[0].release_year }} <br />
+          <span style="font-weight: bold">Yapımcı şirket:</span>
+          {{ filtered[0].production_company }}
+        </l-popup>
       </l-marker>
     </l-map>
   </div>
@@ -47,14 +51,15 @@ export default {
       markers: [],
       data: [],
       LastMarkersList: [],
+      filtered: [],
     };
   },
   updated() {
     this.markers = [];
     let gelenVeri = JSON.parse(JSON.stringify(this.veri));
-    let filtered = gelenVeri.filter((a) => a.title == this.secilmis);
-    for (var i = 0; i < filtered.length; i++) {
-      if (filtered[i].locations != null) {
+    this.filtered = gelenVeri.filter((a) => a.title == this.secilmis);
+    for (var i = 0; i < this.filtered.length; i++) {
+      if (this.filtered[i].locations != null) {
         this.markers.push((Math.random() * (37.83 - 37.62) + 37.62).toFixed(4));
         this.markers.push(
           (Math.random() * (-122.5105 - -122.3696) + -122.3696).toFixed(4)
@@ -92,7 +97,6 @@ export default {
   //             this.markers[y].reverse();
   //           }
   // },
- 
 };
 </script>
 <style>
